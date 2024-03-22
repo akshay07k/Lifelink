@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import service from '../appwrite/config'
 import conf from '../conf/conf';
 import { ID, Query, Permission, Role} from 'appwrite';
@@ -48,9 +48,6 @@ const Room = () => {
         e.preventDefault()
         console.log('MESSAGE:', messageBody)
 
-        const permissions = [
-            Permission.write(Role.user(user.$id)),
-          ]
 
         const payload = {
             user_id:user.$id,
@@ -75,65 +72,93 @@ const Room = () => {
 
   return (
         
-    <div className="flex flex-col min-h-[500px] items-center 
-    justify-center bg-gray-100 py-12">
-      <div className="w-3/5 border rounded-lg overflow-hidden 
-      bg-white">
-        <div className="border-b p-4">
-          <h1 className="text-2xl font-semibold">Chat</h1>
+    <div className="flex h-[720px] bg-gray-100">
+      {/* Sidebar */}
+      <div className="hidden md:block md:w-1/4 bg-white border-r border-gray-300">
+        {/* Sidebar content */}
+        <div className="p-4">
+          <h2 className="text-lg font-semibold mb-4">Contacts</h2>
+          {/* List of contacts */}
+          <ul>
+            <li className="flex items-center space-x-2 mb-2">
+              <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
+              <span className="text-sm">John Doe</span>
+            </li>
+            <li className="flex items-center space-x-2 mb-2">
+              <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
+              <span className="text-sm">Jane Smith</span>
+            </li>
+            {/* Add more contacts here */}
+          </ul>
         </div>
+      </div>
+         {/* Chat Area */}
+      <div className="flex-1 flex flex-col">
+        {/* Chat Header */}
+        <div className="bg-white border-b border-gray-300 p-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Chat with John Doe</h2>
+          <button className="text-blue-500 hover:text-blue-700">Settings</button>
+        </div>
+
+        {/* Chat Messages */}
+        
         <div className="flex-1 overflow-y-auto p-4">
+
         {messages.map(message => (
-    <div 
-        key={message.$id} 
-        className={`flex 
-        justify-${message.$permissions.includes(`delete(\"user:${user.$id}\")`) ? 'end' : 'start'} mb-4`}
-    >
-        <div className={`max-w-xs mx-2 
-        ${message.$permissions.includes(`delete(\"user:${user.$id}\")`) ? 'items-end' : 'items-start'}`}>
+            <div 
+                key={message.$id} 
+                className={`flex 
+                ${message.$permissions.includes(`delete(\"user:${user?.$id}\")`) ? 'justify-end items-end' : 'justify-start items-start'} mb-4`}
+            >
+                <div className={`flex flex-col justify-end`}>
 
-            <p className="text-xs text-gray-500 mb-1">
-                {message.username}</p>
+                    <p className={`flex text-xs text-gray-500 mb-1
+                    ${message.$permissions.includes(`delete(\"user:${user?.$id}\")`) ? 'justify-end' : 'justify-start'}`}>
+                        {message.username}</p>
 
-            <div className={`relative inline-block px-4 py-2 rounded-lg 
-            ${message.$permissions.includes(`delete(\"user:${user.$id}\")`) ? 'bg-green-400 text-black' : 'bg-gray-200 text-gray-700'}`}>
-                <p className="text-sm">{message.body}</p>
-                <span className="text-xs text-gray-400">
-                    {new Date(message.$createdAt).toLocaleString()}</span>
+                    <div className={`px-4 py-2 rounded-full 
+                    ${message.$permissions.includes(`delete(\"user:${user?.$id}\")`) ? 'bg-blue-400 text-black' : 'bg-gray-200 text-gray-700'}`}>
+                        <p className="text-sm">{message.body}</p>
+                        
+                    </div>
+
+                    {/* {message.$permissions.includes(`delete(\"user:${user.$id}\")`) && (
+                        <button 
+                            className="focus:outline-none"
+                            onClick={() => deleteMessage(message.$id)}
+                        >
+                            <DeleteIcon/>
+                        </button>
+                    )} */}
+
+                    
+                    <span className="text-xs text-gray-400">
+                            {new Date(message.$createdAt).toLocaleString()}</span>
+                    
+                </div>
             </div>
-            {message.$permissions.includes(`delete(\"user:${user.$id}\")`) && (
-                <button 
-                    className="text-sm text-red-500 focus:outline-none"
-                    onClick={() => deleteMessage(message.$id)}
-                >
-                    <DeleteIcon/>
-                </button>
-            )}
+            ))}
+
+          {/* Individual Messages */}
+          
+          {/* Add more messages here */}
         </div>
-    </div>
-))}
 
-
-    </div>
-
-    <form id="message--form" onSubmit={handleSubmit} className="w-full max-w-lg">
-        <div className="flex items-center border-t pt-4 mt-4">
-            <textarea 
-                required 
-                placeholder="Say something..." 
+        {/* Message Input */}
+        <form id="message--form" onSubmit={handleSubmit} className="w-full">
+            <div className="bg-white border-t border-gray-300 p-4 pl-14">
+            <input
+                type="text"
+                placeholder="Type your message..."
                 onChange={(e) => setMessageBody(e.target.value)}
                 value={messageBody}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-400"
-            ></textarea>
-            
-            <div className="ml-4">
-                <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md focus:outline-none">Send</button>
+                className=" w-5/6 border border-gray-300 rounded-lg p-2 focus:outline-none focus:border-blue-500"
+            />
+            <button className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg ml-4">Send</button>
             </div>
-        </div>
-    </form>
-</div>
-</div>
-
+        </form>
+      </div>
+    </div>
   )
 }
 

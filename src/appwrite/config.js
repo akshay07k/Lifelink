@@ -19,9 +19,6 @@ export class Services {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                [
-                    Query.limit(100)
-                ]
             )
         } catch (error) {
             console.log("Appwrite service :: getMessages :: error", error);
