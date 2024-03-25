@@ -9,8 +9,10 @@ import Blood from "./blood/Blood.jsx"
 import Button from "./Button.jsx"
 import Input from "./Input.jsx"
 import Login from "./Login.jsx"
-import Signup from "./Signup.jsx"
+import Signup from "./Signup/Signup.jsx"
+import DocSignup from "./Signup/DocSignup.jsx"
 import LogoutBtn from "./header/LogoutBtn.jsx"
+import Select from "./Select.jsx"
 
 
 export {
@@ -26,5 +28,7 @@ export {
     Input,
     Login,
     Signup,
-    LogoutBtn
+    DocSignup,
+    LogoutBtn,
+    Select
 }

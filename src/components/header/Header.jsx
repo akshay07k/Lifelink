@@ -61,7 +61,8 @@ export default function Header() {
                     <div>
                     <div className='flex items-center justify-end w-44 cursor-pointer px-3 border-l-2 border-slate-200' 
                     onClick={userClick}>
-                            <img src={doctor1} alt="" className='w-10 h-10 object-cover cursor-pointer rounded-[50%] mr-1.5'/>
+                            <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpc-IOXksvrRZO191r4scUWCErj6cQYqiBcg&usqp=CAU'} 
+                            alt="" className='w-10 h-10 object-cover cursor-pointer rounded-[50%] mr-1.5'/>
                             <p>Hi {auth.userData?.name}</p>
                             {!down ? <ExpandMoreIcon className='p-[2px]'/> : <ExpandLessIcon className='p-[2px]'/>}
                     </div>

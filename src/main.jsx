@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Layout, Home, About, Doctors, Blood, Contact, Login, Signup } from './components/index.js'
+import { Layout, Home, About, 
+  Doctors, Blood, Contact, Login, 
+  Signup, DocSignup } from './components/index.js'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
 import Room from './pages/Room.jsx'
+import Doctor from './pages/Doctor.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: '/room',
         element: <Room />
+      },
+      {
+        path: '/docsignup',
+        element: <DocSignup />
+      },
+      {
+        path: '/doctor/:slug',
+        element: <Doctor />
       },
     ]
   }
