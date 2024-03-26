@@ -43,7 +43,7 @@ export default function Post() {
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
-                            <Link to={`/edit-doctor/${post.$id}`}>
+                            <Link to={`/doc-ud/${post.$id}`}>
                                 <Button bgColor="bg-green-500" className="mr-3">
                                     Edit
                                 </Button>
@@ -61,5 +61,6 @@ export default function Post() {
                     {parse(post.description)}
                     </div>
         </div>
-    ) : <div>hekko</div>;
+    ) : <div className="w-full h-[500px] text-4xl 
+    flex justify-center items-center">Profile not exists</div>;
 }

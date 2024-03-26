@@ -13,7 +13,7 @@ import { Hidden } from '@mui/material';
 export default function Header() {
 
     const auth = useSelector((state) => state.auth)
-    console.log(auth);
+    // console.log(auth);
 
 
     const [down, setDown] = useState(false)

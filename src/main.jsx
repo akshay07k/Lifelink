@@ -8,8 +8,7 @@ import { Layout, Home, About,
   Signup, DocSignup } from './components/index.js'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
-import Room from './pages/Room.jsx'
-import Doctor from './pages/Doctor.jsx'
+import { AddDoc, EditDoc, Doctor, Room} from "./pages/index.js"
 
 const router = createBrowserRouter([
   {
@@ -49,8 +48,12 @@ const router = createBrowserRouter([
         element: <Room />
       },
       {
-        path: '/docsignup',
-        element: <DocSignup />
+        path: '/doc-cr',
+        element: <AddDoc />
+      },
+      {
+        path: '/doc-ud/:slug',
+        element: <EditDoc />
       },
       {
         path: '/doctor/:slug',
