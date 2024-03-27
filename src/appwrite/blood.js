@@ -1,7 +1,7 @@
 import conf from '../conf/conf.js'
 import { Client, Databases, ID } from 'appwrite'
 
-export class Services {
+export class BloodServices {
     client = new Client();
     databases;
 
@@ -16,7 +16,7 @@ export class Services {
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId,
+                conf.appwriteCollectionId3,
             )
         } catch (error) {
             console.log("Appwrite service :: getMessages :: error", error);
@@ -27,7 +27,7 @@ export class Services {
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId, 
-                conf.appwriteCollectionId, 
+                conf.appwriteCollectionId3, 
                 ID.unique(),
                 payload 
             )
@@ -40,7 +40,7 @@ export class Services {
         try {
             await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId, 
+                conf.appwriteCollectionId3, 
                 id
             );
         } catch (error) {
@@ -50,6 +50,6 @@ export class Services {
 
 }
 
-const service = new Services();
+const bloodServices = new BloodServices();
 
-export default service;
+export default bloodServices;

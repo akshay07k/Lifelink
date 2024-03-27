@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Layout, Home, About, 
-  Doctors, Blood, Contact, Login, 
-  Signup, DocSignup } from './components/index.js'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Home, About, AllReq,
+  Blood, Contact, Login, 
+  Signup } from './components/index.js'
 import { AddDoc, AllDoc, EditDoc, Doctor, Room} from "./pages/index.js"
 
 const router = createBrowserRouter([
@@ -28,14 +28,6 @@ const router = createBrowserRouter([
         element: <Contact />
       },
       {
-        path: "doctors",
-        element: <AllDoc />
-      },
-      {
-        path: "blood",
-        element: <Blood />
-      },
-      {
         path: '/login',
         element: <Login />
       },
@@ -48,6 +40,10 @@ const router = createBrowserRouter([
         element: <Room />
       },
       {
+        path: "doctors",
+        element: <AllDoc />
+      },
+      {
         path: '/doc-cr',
         element: <AddDoc />
       },
@@ -58,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: '/doctor/:slug',
         element: <Doctor />
+      },
+      {
+        path: "blood",
+        element: <Blood />
+      },
+      {
+        path: '/blood-req',
+        element: <AllReq />
       },
     ]
   }

@@ -6,6 +6,7 @@ import Layout from "./Layout.jsx"
 import Contact from "./contact/Contact.jsx"
 import Doctors from "./doctors/Doctors.jsx" 
 import Blood from "./blood/Blood.jsx"
+import AllReq from "./blood/AllReq.jsx"
 import Button from "./Button.jsx"
 import Input from "./Input.jsx"
 import Login from "./Login.jsx"
@@ -24,6 +25,7 @@ export {
     Contact,
     Doctors,
     Blood,
+    AllReq,
     Button,
     Input,
     Login,
