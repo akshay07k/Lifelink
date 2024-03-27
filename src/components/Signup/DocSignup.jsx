@@ -10,6 +10,7 @@ export default function DocSignup({ post }) {
     const { register, handleSubmit } = useForm({
         defaultValues: {
             name: post?.name || "",
+            title: post?.title || "",
             slug: post?.$id || "",
             description: post?.description || "",
             status: post?.status || "active",
@@ -66,6 +67,12 @@ export default function DocSignup({ post }) {
                         placeholder="Name"
                         className="mb-4"
                         {...register("name", { required: true })}
+                    />
+                    <Input
+                        label="Title :"
+                        placeholder="Title"
+                        className="mb-4"
+                        {...register("title", { required: true })}
                     />
                     <label htmlFor="description">Description:</label>
                     <textarea

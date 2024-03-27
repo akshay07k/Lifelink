@@ -1,13 +1,28 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {doctorsImage, doctor1, doctor2,
         doctor3, doctor4, map} from "../../assets/index.js"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import docService from '../../appwrite/authDoc.js';
+import DocPost from './DocPost.jsx';
 
 export default function Home() {
 
     const auth = useSelector((state) => state.auth)
+
+    const [posts, setPosts] = useState([])
+    useEffect(() => {
+        if(auth){
+            docService.getPosts([]).then((posts) => {
+                if (posts) {
+                    setPosts(posts.documents)
+                    console.log(posts);
+                }
+            })
+        }
+        
+    }, [])
 
   return (
     <>
@@ -33,7 +48,7 @@ export default function Home() {
                 fingertips.
             </p>
             <div className='p-2.5 flex'>
-                <Link to={!auth.status ? '/login' : '/'}
+                <Link to={!auth.status ? '/login' : '/doctors'}
                  className='bg-[#0066ff] text-white 
                  text-lg p-3 my-2 rounded-md' 
                 >
@@ -60,81 +75,25 @@ export default function Home() {
             >Meet Our Specialist Doctors</h1>
         </div>
         <div 
-         className='w-[90%] h-[400px] flex items-center mx-[5%] my-5'
+            className='h-[400px] whitespace-nowrap flex items-end
+             mx-[5%] my-5 overflow-x-auto overflow-y-hidden
+             scroll-smooth'
         >
-            <div
-             className='h-[90%] w-3/12'
-            >
-                <img 
-                 className='h-3/5 w-4/5 object-cover mt-5 mx-5 rounded-[10px]'
-                src={doctor1} alt="" />
-                <h2
-                 className='font-thin mx-[30px] mt-4'
-                >Dr. Jacob Jones</h2>
-                <p
-                 className='mx-[30px] my-[5px]'
-                >Dermatologist</p>
-                <button
-                 className='text-[#1573ff] border bg-transparent mx-[30px]
-                 my-[5px] p-2 rounded-[10px] border-[none] border-solid border-[#1573ff]
-                 hover:bg-[#277dff] hover:text-white hover:cursor-pointer'
-                >See Profile</button>
-            </div>
-            <div
-             className='h-[90%] w-3/12'
-            >
-                <img 
-                 className='h-3/5 w-4/5 object-cover mt-5 mx-5 rounded-[10px]'
-                src={doctor2} alt="" />
-                <h2
-                 className='font-thin mx-[30px] mt-4'
-                >Dr. Jacob Jones</h2>
-                <p
-                 className='mx-[30px] my-[5px]'
-                >Dermatologist</p>
-                <button
-                 className='text-[#1573ff] border bg-transparent mx-[30px]
-                 my-[5px] p-2 rounded-[10px] border-[none] border-solid border-[#1573ff]
-                 hover:bg-[#277dff] hover:text-white hover:cursor-pointer'
-                >See Profile</button>
-            </div>
-            <div
-             className='h-[90%] w-3/12'
-            >
-                <img 
-                 className='h-3/5 w-4/5 object-cover mt-5 mx-5 rounded-[10px]'
-                src={doctor3} alt="" />
-                <h2
-                 className='font-thin mx-[30px] mt-4'
-                >Dr. Jacob Jones</h2>
-                <p
-                 className='mx-[30px] my-[5px]'
-                >Dermatologist</p>
-                <button
-                 className='text-[#1573ff] border bg-transparent mx-[30px]
-                 my-[5px] p-2 rounded-[10px] border-[none] border-solid border-[#1573ff]
-                 hover:bg-[#277dff] hover:text-white hover:cursor-pointer'
-                >See Profile</button>
-            </div>
-            <div
-             className='h-[90%] w-3/12'
-            >
-                <img 
-                 className='h-3/5 w-4/5 object-cover mt-5 mx-5 rounded-[10px]'
-                src={doctor4} alt="" />
-                <h2
-                 className='font-thin mx-[30px] mt-4'
-                >Dr. Jacob Jones</h2>
-                <p
-                 className='mx-[30px] my-[5px]'
-                >Dermatologist</p>
-                <button
-                 className='text-[#1573ff] border bg-transparent mx-[30px]
-                 my-[5px] p-2 rounded-[10px] border-[none] border-solid border-[#1573ff]
-                 hover:bg-[#277dff] hover:text-white hover:cursor-pointer'
-                >See Profile</button>
-            </div>
+            {posts.length ? posts.map((post) => (
+                <div className='h-[90%] w-[25%] flex-shrink-0' key={post.$id}>
+                    <DocPost {...post} />
+                </div>
+            )) : (
+                <div 
+                    className='w-full h-full flex justify-center 
+                    items-center text-xl'
+                >
+                    loading...
+                </div>
+            )}
         </div>
+
+
     </div>
 
     <div 

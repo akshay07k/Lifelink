@@ -8,7 +8,7 @@ import { Layout, Home, About,
   Signup, DocSignup } from './components/index.js'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
-import { AddDoc, EditDoc, Doctor, Room} from "./pages/index.js"
+import { AddDoc, AllDoc, EditDoc, Doctor, Room} from "./pages/index.js"
 
 const router = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "doctors",
-        element: <Doctors />
+        element: <AllDoc />
       },
       {
         path: "blood",

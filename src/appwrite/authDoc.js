@@ -15,7 +15,7 @@ export class DocServices {
     }
 
     async createPost({name, description, doctorImage,
-    status, user_id}) {
+    status, user_id, title}) {
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -24,9 +24,10 @@ export class DocServices {
                 {
                     name,
                     description,
-                    doctorImage,
                     status,
-                    user_id
+                    user_id,
+                    doctorImage,
+                    title
                 }
             )
         } 
@@ -37,7 +38,7 @@ export class DocServices {
     }
 
     async updatePost(slug, {name, description, doctorImage,
-    status}){
+    status, title}){
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -47,7 +48,8 @@ export class DocServices {
                     name,
                     description,
                     doctorImage,
-                    status
+                    status,
+                    title
                 }
             )
         } 
