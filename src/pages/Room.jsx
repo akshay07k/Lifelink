@@ -12,6 +12,7 @@ const Room = () => {
 
     useEffect(() => {
         getMessages();
+        console.log("hello");
 
         const unsubscribe = service.client.subscribe(
           `databases.${conf.appwriteDatabaseId}
@@ -72,6 +73,7 @@ const Room = () => {
         // console.log('RESPONSE:', response)
         // setMessages(prevState => [response, ...prevState])
         setMessageBody('');
+        getMessages();
     };
 
     const deleteMessage = async (id) => {

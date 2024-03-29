@@ -59,7 +59,7 @@ export default function DocSignup({ post }) {
             text-4xl pb-4 w-full max-w-[800px] bg-gradient-to-r 
             from-blue-700 to-green-700 text-transparent 
             bg-clip-text border-b"
-            >{post ? "Update" : "Create"} Profile</div>
+            >{post ? "upDatE" : "crEaTe"} dOcTor pRofiLe</div>
             <form onSubmit={handleSubmit(submit)} className="flex flex-wrap mx-8 my-14">
                 <div className="w-full md:w-2/3 md:px-2">
                     <Input

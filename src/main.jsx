@@ -5,9 +5,8 @@ import './index.css'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Home, About, AllReq,
-  Blood, Contact, Login, 
-  Signup } from './components/index.js'
+import { Home, About, AllReq, ReqPage,
+  Blood, Contact, Login, Signup } from './components/index.js'
 import { AddDoc, AllDoc, EditDoc, Doctor, Room} from "./pages/index.js"
 
 const router = createBrowserRouter([
@@ -62,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: '/blood-req',
         element: <AllReq />
+      },
+      {
+        path: '/req/:slug',
+        element: <ReqPage />
       },
     ]
   }

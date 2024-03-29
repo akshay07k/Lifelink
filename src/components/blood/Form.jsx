@@ -3,11 +3,13 @@ import { Input, Button } from "../index"
 import { useForm } from 'react-hook-form';
 import bloodServices from '../../appwrite/blood';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Form() {
 
     const { register, handleSubmit } = useForm()
     const user = useSelector((state) => state.auth.userData)
+    const navigate = useNavigate()
 
     const submit = async(data) => {
         const payload = {...data, user_id: user.$id}
@@ -15,6 +17,7 @@ function Form() {
         const message = await bloodServices.createMessage(payload)
         if(message){
             console.log("message created");
+            navigate("/blood-req")
         }
     };
 

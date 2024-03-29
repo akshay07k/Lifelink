@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import bloodServices from '../../appwrite/blood'
 import ReqCard from './ReqCard'
+import { Link } from 'react-router-dom'
 
 function AllReq() {
 
@@ -19,9 +20,10 @@ function AllReq() {
         <div className='w-full py-8'>
             <div className='flex flex-wrap'>
                 {posts.map((post) => (
-                    <div key={post.$id} className='p-2 w-1/4'>
+                    <Link to={`/req/${post.$id}`} key={post.$id}
+                     className='p-2 w-1/4'>
                         <ReqCard {...post} />
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

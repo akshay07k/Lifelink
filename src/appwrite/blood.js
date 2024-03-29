@@ -36,6 +36,21 @@ export class BloodServices {
         }
     }
 
+    async getMessage(slug){
+        try {
+            return this.databases.getDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId3,
+                slug
+            )
+        } 
+        catch (error) {
+            console.log("Appwrite service :: getPost :: error",
+            error);
+            return false;
+        }
+    }
+
     async deleteMessage(id){
         try {
             await this.databases.deleteDocument(

@@ -22,6 +22,7 @@ export default function Footer() {
                             </h1>
                         </Link>
                     </div>
+                    
                     <div>
                         <h2 className='text-3xl text-white mb-3 pl-4
                          border-gray-600 border-b-2 rounded-xl'>About</h2>

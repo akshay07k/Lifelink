@@ -7,6 +7,7 @@ import Contact from "./contact/Contact.jsx"
 import Doctors from "./doctors/Doctors.jsx" 
 import Blood from "./blood/Blood.jsx"
 import AllReq from "./blood/AllReq.jsx"
+import ReqPage from "./blood/ReqPage.jsx"
 import Button from "./Button.jsx"
 import Input from "./Input.jsx"
 import Login from "./Login.jsx"
@@ -26,6 +27,7 @@ export {
     Doctors,
     Blood,
     AllReq,
+    ReqPage,
     Button,
     Input,
     Login,
