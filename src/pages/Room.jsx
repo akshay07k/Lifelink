@@ -12,12 +12,9 @@ const Room = () => {
 
     useEffect(() => {
         getMessages();
-        console.log("hello");
 
         const unsubscribe = service.client.subscribe(
-          `databases.${conf.appwriteDatabaseId}
-          .collections.${conf.appwriteCollectionId}
-          .documents`, response => {
+          `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteCollectionId}.documents`, response => {
             console.log(response);
             if (response.events.includes(
               "databases.*.collections.*.documents.*.create"
@@ -44,6 +41,7 @@ const Room = () => {
     }, []);
 
     useEffect(() => {
+        
         scrollToBottom();
     }, [messages]);
 
@@ -71,9 +69,8 @@ const Room = () => {
 
         const response = await service.createMessage(payload);
         // console.log('RESPONSE:', response)
-        // setMessages(prevState => [response, ...prevState])
+        // setMessages(prevState => [...prevState, response])
         setMessageBody('');
-        getMessages();
     };
 
     const deleteMessage = async (id) => {
@@ -106,9 +103,9 @@ const Room = () => {
                 {/* Chat Messages */}
                 <div ref={chatAreaRef} className="flex-1 
                 overflow-y-auto p-4">
-                    {messages.map(message => (
+                    {messages.map((message, index) => (
 
-                        <div key={message.$id} 
+                        <div key={`${message.$id}-${index}`} 
                         className={`flex 
                         ${message.$permissions
                         .includes(`delete(\"user:${user?.$id}\")`) 

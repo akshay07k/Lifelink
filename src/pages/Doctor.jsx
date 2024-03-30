@@ -33,6 +33,18 @@ export default function ProfilePage() {
         });
     };
 
+    const updatePost = () => {
+        console.log(post);
+        const data = post.requests.map(request => JSON.parse(request));
+        
+        const newRequest = { userid: userData.$id, name: userData.name, confirm: "false" };
+        const updatedRequests = [...data, newRequest];
+
+        docService.updateRequests(post.$id, updatedRequests).then((status) => {
+            status && console.log("updated succesfully");
+        });
+    }
+
     return post ? (
         <div className="flex flex-col lg:flex-row items-center py-8
         min-h-[410px]">
@@ -71,7 +83,9 @@ export default function ProfilePage() {
                         <Button bgColor="bg-blue-500" className="px-8 py-2 mx-2">
                             <VideoCallIcon/>video call
                         </Button>
-                        <Button bgColor="bg-blue-500" className="px-8 py-2 mx-2">
+                        <Button 
+                        onClick={updatePost}
+                        bgColor="bg-blue-500" className="px-8 py-2 mx-2">
                             <ChatIcon/>chat
                         </Button>
                     </div>

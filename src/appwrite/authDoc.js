@@ -59,6 +59,27 @@ export class DocServices {
         }
     }
 
+    async updateRequests(slug, requests) {
+        try {
+            // Convert each request object to a string
+            const serializedRequests = requests.map(request => JSON.stringify(request));
+    
+            return await this.databases.updateDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId2,
+                slug,
+                {
+                    requests: serializedRequests 
+                }
+            );
+        } catch (error) {
+            console.log("Appwrite service :: updateRequests :: error", error);
+            throw error;
+        }
+    }
+    
+    
+
     async deletePost(slug){
         try {
             await this.databases.deleteDocument(

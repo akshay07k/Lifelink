@@ -1,19 +1,39 @@
 import React, { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import {doctor1} from '../../assets/index'
-import { Input, Button, LogoutBtn } from '../index';
+import { LogoutBtn } from '../index';
+import docService from "../../appwrite/authDoc"
 
 import SearchIcon from '@mui/icons-material/Search'
-import PersonIcon from '@mui/icons-material/Person';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Hidden } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 export default function Header() {
 
     const auth = useSelector((state) => state.auth)
-    // console.log(auth);
+    console.log(auth);
+    
+    const [notification, setNotification] = useState([])
+    const slug = auth.userData?.labels[0]
+    // console.log(slug);
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        
+        if (slug) {
+            docService.getPost(slug).then((post) => {
+                if (post) {
+                    const data = post.requests
+                    setNotification(data)
+                }
+                else navigate("/")
+            });
+        } else navigate("/")
+    }, [slug, navigate])
+    
 
 
     const [down, setDown] = useState(false)
@@ -46,8 +66,8 @@ export default function Header() {
                 </div>
                 
                 {!auth.status ? (
-                    <div>
-                        <Link to="/login" className="no-underline text-xl mr-[15px]">
+                    <div className='w-60'>
+                        <Link to="/login" className="no-underline text-xl mx-8">
                             Log in
                         </Link>
                         <Link
@@ -58,7 +78,12 @@ export default function Header() {
                         </Link>
                     </div>
                 ) : (
-                    <div>
+                    <div className='flex items-center w-60'>
+                        <Link to={`/notifications/${slug}`}
+                         className='mx-4 p-2 text-blue-400 
+                         mr-2 '>
+                            {notification?.length ? <NotificationsActiveIcon /> : <NotificationsIcon /> }
+                        </Link>
                     <div className='flex items-center justify-end w-44 cursor-pointer px-3 border-l-2 border-slate-200' 
                     onClick={userClick}>
                             <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpc-IOXksvrRZO191r4scUWCErj6cQYqiBcg&usqp=CAU'} 
@@ -71,9 +96,9 @@ export default function Header() {
 
             </div>
 
-                    <LogoutBtn handleClick={userClick}/>
+                    <LogoutBtn handleClick={userClick} userdata={auth.userData}/>
 
-            <div className="h-[35%] absolute bottom-1 left-[44.4%]" >
+            <div className="h-[35%] absolute bottom-1 left-1/3" >
                 <ul className="w-[30%] flex justify-around">
                     <li className="text-xl text-[#333] no-underline transition-[0.5s] inline-block list-none mx-[15px] my-2.5 hover:text-[#0B8457]">
                         <NavLink to="/" className={({ isActive }) => `${isActive ? "text-green-800" : ""}`}>
