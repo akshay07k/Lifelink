@@ -7,7 +7,8 @@ import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home, About, AllReq, ReqPage,
   Blood, Contact, Login, Signup } from './components/index.js'
-import { AddDoc, AllDoc, EditDoc, Doctor, Room, Notification} from "./pages/index.js"
+import { AddDoc, AllDoc, EditDoc, Doctor,
+   Room, Notification, Video} from "./pages/index.js"
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
         path: '/room',
         element: <Room />
       },
+
+      {
+        path: '/video/:roomid',
+        element: <Video />
+      },
       {
         path: "doctors",
         element: <AllDoc />
@@ -63,7 +69,7 @@ const router = createBrowserRouter([
         element: <AllReq />
       },
       {
-        path: '/req/:slug',
+        path: '/blood-req/:slug',
         element: <ReqPage />
       },
       {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import service from '../appwrite/config';
-import conf from '../conf/conf';
+import service from '../../appwrite/config';
+import conf from '../../conf/conf';
 import { useSelector } from 'react-redux';
 
 const Room = () => {

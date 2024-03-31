@@ -31,7 +31,7 @@ export default function Header() {
                 }
                 else navigate("/")
             });
-        } else navigate("/")
+        }
     }, [slug, navigate])
     
 

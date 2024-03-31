@@ -80,9 +80,10 @@ export default function ProfilePage() {
                 </div>
                 {!isAuthor && (
                     <div className="">
+                        <Link to={`/video/${Date.now()}`}>
                         <Button bgColor="bg-blue-500" className="px-8 py-2 mx-2">
                             <VideoCallIcon/>video call
-                        </Button>
+                        </Button></Link>
                         <Button 
                         onClick={updatePost}
                         bgColor="bg-blue-500" className="px-8 py-2 mx-2">

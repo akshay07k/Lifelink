@@ -20,7 +20,7 @@ function AllReq() {
         <div className='w-full py-8'>
             <div className='flex flex-wrap'>
                 {posts.map((post) => (
-                    <Link to={`/req/${post.$id}`} key={post.$id}
+                    <Link to={`/blood-req/${post.$id}`} key={post.$id}
                      className='p-2 w-1/4'>
                         <ReqCard {...post} />
                     </Link>

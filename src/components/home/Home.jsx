@@ -17,7 +17,7 @@ export default function Home() {
             docService.getPosts([]).then((posts) => {
                 if (posts) {
                     setPosts(posts.documents)
-                    console.log(posts);
+                    // console.log(posts);
                 }
             })
         }
