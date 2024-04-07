@@ -7,6 +7,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 function Notification() {
 
     const [requests, setRequests] = useState([])
+    const [post, setPost] = useState(null)
     const { slug } = useParams()
     const navigate = useNavigate()
 
@@ -14,8 +15,10 @@ function Notification() {
         if (slug) {
             docService.getPost(slug).then((post) => {
                 if (post) {
-                    const data = post.requests.map(request => JSON.parse(request))
+                    const data = post.requests
+                    .map(request => JSON.parse(request))
                     setRequests(data)
+                    setPost(post)
                     console.log(data);
                 }
                 else navigate("/");
@@ -23,6 +26,28 @@ function Notification() {
         } 
 
     }, [slug, navigate]);
+
+    const acceptRequest = async (userid, roomid) => {
+        const index = requests.findIndex((e) => e.userid == userid)
+        requests[index].callId = `/video/${roomid}`;
+        requests[index].confirm = true;
+        console.log(requests);
+
+        await docService.updateRequests(post.$id, requests).then((status) => {
+            status && console.log("Accepted succesfully");
+        });
+    }
+
+    const rejectRequest = (id) => {
+        // console.log(requests);
+        
+        const updatedRequests = requests.filter((e) => e.userid != id)
+        setRequests(updatedRequests);
+
+        docService.updateRequests(post.$id, updatedRequests).then((status) => {
+            status && console.log("Deleted succesfully");
+        });
+    }
     
 
 
@@ -30,7 +55,8 @@ function Notification() {
     <div>
         {requests.map((data) => (
             <div key={data.userid}>
-                <NotfCard {...data}/>
+                <NotfCard {...data} rejectRequest={rejectRequest} 
+                acceptRequest={acceptRequest} />
             </div>
         ))}
     </div>

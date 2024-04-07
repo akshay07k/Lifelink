@@ -27,6 +27,7 @@ export default function Header() {
             docService.getPost(slug).then((post) => {
                 if (post) {
                     const data = post.requests
+                    // console.log(data);
                     setNotification(data)
                 }
                 else navigate("/")

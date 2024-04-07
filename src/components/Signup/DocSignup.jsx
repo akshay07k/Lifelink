@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, Select } from "../index";
 import docService from "../../appwrite/authDoc";
@@ -17,10 +17,13 @@ export default function DocSignup({ post }) {
         },
     });
 
+    const [loading, setLoading] = useState(false)
+
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
+        setLoading(true)
         if (post) {
             const file = data.image[0] ? await docService.uploadFile(data.image[0]) : null;
 
@@ -34,6 +37,7 @@ export default function DocSignup({ post }) {
             });
 
             if (dbPost) {
+                setLoading(false)
                 navigate(`/doctor/${dbPost.$id}`);
             }
         } else {
@@ -45,6 +49,7 @@ export default function DocSignup({ post }) {
                 const dbPost = await docService.createPost({ ...data, user_id: userData.$id });
 
                 if (dbPost) {
+                    setLoading(false)
                     navigate(`/doctor/${dbPost.$id}`);
                 }
             }
@@ -107,7 +112,8 @@ export default function DocSignup({ post }) {
                         {...register("status", { required: true })}
                     />
                     <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-                        {post ? "Update" : "Submit"}
+                        {post ? !loading ? "Update" : "Updating profile..." :
+                        !loading ? "Submit" : "Creating profile..."}
                     </Button>
                 </div>
             </form>

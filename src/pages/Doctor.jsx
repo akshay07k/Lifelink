@@ -3,12 +3,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import docService from "../appwrite/authDoc";
 import { Button } from "../components";
 import { useSelector } from "react-redux";
-import VideoCallIcon from '@mui/icons-material/VideoCall';
-import ChatIcon from '@mui/icons-material/Chat';
-
 
 export default function ProfilePage() {
     const [post, setPost] = useState(null);
+    const [request, setRequest] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
 
@@ -16,41 +14,93 @@ export default function ProfilePage() {
     const isAuthor = post && userData ? post.user_id === userData.$id : false;
 
     useEffect(() => {
-        if (slug) {
-            docService.getPost(slug).then((post) => {
-                if (post) setPost(post);
-                else navigate("/");
-            });
-        } else navigate("/");
-    }, [slug, navigate]);
-
-    const deletePost = () => {
-        docService.deletePost(post.$id).then((status) => {
-            if (status) {
-                docService.deleteFile(post.doctorImage);
+        const fetchPost = async () => {
+            try {
+                if (!slug || !userData) {
+                    return;
+                }
+    
+                const post = await docService.getPost(slug);
+                if (!post) {
+                    navigate("/");
+                    return;
+                }
+    
+                setPost(post);
+                console.log(post);
+    
+                const userRequest = post.requests.find(req => {
+                    const parsedReq = JSON.parse(req);
+                    return parsedReq.userid === userData.$id;
+                });
+    
+                if (userRequest) {
+                    setRequest(JSON.parse(userRequest));
+                    // console.log(request);
+                }
+            } catch (error) {
+                console.error("Error fetching post:", error);
                 navigate("/");
             }
-        });
+        };
+    
+        fetchPost();
+    }, [slug, navigate, userData]);
+
+    useEffect(() => {
+        console.log(request);
+    }, [request]);
+
+    const deletePost = () => {
+        docService.deletePost(post.$id)
+            .then((status) => {
+                if (status) {
+                    docService.deleteFile(post.doctorImage);
+                    navigate("/");
+                }
+            })
+            .catch(error => console.error("Error deleting post:", error));
     };
 
-    const updatePost = () => {
-        console.log(post);
-        const data = post.requests.map(request => JSON.parse(request));
+    const deleteRequest =async (id) => {
+        // console.log(requests);
         
-        const newRequest = { userid: userData.$id, name: userData.name, confirm: "false" };
-        const updatedRequests = [...data, newRequest];
+        const updatedRequests = post.requests
+        .map(request => JSON.parse(request))
+        .filter((e) => e.userid != id)
+        setRequest(updatedRequests);
 
-        docService.updateRequests(post.$id, updatedRequests).then((status) => {
-            status && console.log("updated succesfully");
+        await docService.updateRequests(post.$id, updatedRequests).then((status) => {
+            status && console.log("Deleted succesfully");
         });
+
+        navigate(`${request.callId}`)
     }
 
+    const updateRequest = () => {
+        const requestData = post.requests.map(request => JSON.parse(request));
+        const newRequest = { 
+            userid: userData.$id,
+            name: userData.name, 
+            confirm: false,
+            callId: "", 
+        };
+        const updatedRequests = [...requestData, newRequest];
+
+        docService.updateRequests(post.$id, updatedRequests)
+            .then((status) => {
+                if (status) {
+                    console.log("Request updated successfully");
+                    setRequest(newRequest);
+                }
+            })
+            .catch(error => console.error("Error updating request:", error));
+    };
+
     return post ? (
-        <div className="flex flex-col lg:flex-row items-center py-8
-        min-h-[410px]">
+        <div className="flex flex-col lg:flex-row items-center py-8 min-h-[410px]">
             <div className="lg:w-1/3 mb-4 lg:mb-0">
-                <h2 className="ml-20 text-lg font-medium font-sans">
-                    Profile Picture:</h2>
+                <h2 className="ml-20 text-lg font-medium font-sans">Profile Picture:</h2>
                 <img
                     src={docService.getFilePreview(post.doctorImage)}
                     alt={post.name}
@@ -59,17 +109,13 @@ export default function ProfilePage() {
                 {isAuthor && (
                     <div className="mt-2 ml-28 gap-3 flex justify-center lg:justify-start">
                         <Link to={`/doc-ud/${post.$id}`}>
-                            <Button bgColor="bg-green-500" className="mr-2">
-                                Edit
-                            </Button>
+                            <Button bgColor="bg-green-500" className="mr-2">Edit</Button>
                         </Link>
-                        <Button bgColor="bg-red-500" onClick={deletePost}>
-                            Delete
-                        </Button>
+                        <Button bgColor="bg-red-500" onClick={deletePost}>Delete</Button>
                     </div>
                 )}
             </div>
-            <div className="lg:w-2/3 lg:pl-8 max-w-[700px] ">
+            <div className="lg:w-2/3 lg:pl-8 max-w-[700px]">
                 <div className="text-left">
                     <h2 className="text-lg font-medium font-sans">Name:</h2>
                     <h1 className="text-2xl font-semibold mx-2 mb-2">Dr. {post.name}</h1>
@@ -80,20 +126,39 @@ export default function ProfilePage() {
                 </div>
                 {!isAuthor && (
                     <div className="">
-                        <Link to={`/video/${Date.now()}`}>
-                        <Button bgColor="bg-blue-500" className="px-8 py-2 mx-2">
-                            <VideoCallIcon/>video call
-                        </Button></Link>
-                        <Button 
-                        onClick={updatePost}
-                        bgColor="bg-blue-500" className="px-8 py-2 mx-2">
-                            <ChatIcon/>chat
-                        </Button>
+                        {request?.callId ? (
+                            <Button 
+                                onClick={() => deleteRequest(request.userid)}
+                                bgColor="bg-blue-500" 
+                                className="px-8 py-2 mx-2 opacity-90"
+                            >
+                                Click to start 
+                            </Button>
+                            
+                        ) :
+                        request ? (
+                            <Button 
+                                bgColor="bg-blue-500" 
+                                className="px-8 py-2 mx-2 opacity-90"
+                            >
+                                Request sent successfully
+                            </Button>
+                        ) : (
+                            <Button 
+                                onClick={updateRequest}
+                                bgColor="bg-blue-500" 
+                                className="px-8 py-2 mx-2"
+                            >
+                                Request Consultation
+                            </Button>
+                        )}
                     </div>
                 )}
             </div>
-
         </div>
-    ) : <div className="w-full h-96 flex justify-center items-center text-xl"
-    >Loading...</div>;
+    ) : (
+        <div className="w-full h-96 flex justify-center items-center text-xl">
+            Loading...
+        </div>
+    );
 }

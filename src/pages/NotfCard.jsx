@@ -1,6 +1,15 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom"
 
-const ConsultationCard = ({ name }) => {
+const NotfCard = ({ 
+  name , 
+  userid, 
+  rejectRequest, 
+  acceptRequest 
+}) => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex 
      mx-36 my-8 justify-between">
@@ -10,10 +19,18 @@ const ConsultationCard = ({ name }) => {
       </div>
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
+          <button 
+          onClick={async () => {
+            const roomid = Date.now();
+            await acceptRequest(userid, roomid);
+            navigate(`/video/${roomid}`)
+          }}
+          className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
             Accept
           </button>
-          <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          <button 
+          onClick={() => rejectRequest(userid)}
+          className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Reject
           </button>
         </div>
@@ -22,4 +39,4 @@ const ConsultationCard = ({ name }) => {
   );
 };
 
-export default ConsultationCard;
+export default NotfCard;
