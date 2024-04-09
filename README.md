@@ -1,8 +1,23 @@
-# React + Vite
+# HealthCare Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a HealthCare Website that facilitates various features like consulting with doctors online, finding nearby hospitals, and blood services.
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- **User Registration**: Users can register on the website by providing a username and password.
+- **User Login**: Registered users can log in to their accounts.
+- **Consultation with Doctors**: Users can request consultations with doctors online.
+- **Find Nearby Hospitals**: Users can search for nearby hospitals based on their location.
+- **Blood Services**: Users can donate blood and request blood services.
+- **Rate Doctors**: Users can rate the doctors they consulted with.
+
+## Installation
+Clone the repository:
+```bash
+git clone https://github.com/your_username/healthcare-website.git
