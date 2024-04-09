@@ -1,5 +1,6 @@
 # HealthCare Website
 
+![Lifelink](https://github.com/akshay07k/Lifelink/blob/main/src/assets/lifelink.png)
 
 ## Getting Started
 
