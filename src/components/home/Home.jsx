@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {doctorsImage, doctor1, doctor2,
-        doctor3, doctor4, map} from "../../assets/index.js"
+import {doctorsImage, map} from "../../assets/index.js"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';

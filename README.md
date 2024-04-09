@@ -3,12 +3,12 @@
 
 ## Getting Started
 
-    After cloning the repo ensure you complete the necessary installations
+After cloning the repo ensure you complete the necessary installations
    ```bash
      npm install
      npm run dev
    ```
-    Create a new `.env` folder and create the necessary variables based on the `src/conf/conf.js`
+Create a new `.env` folder and create the necessary variables based on the `src/conf/conf.js`
 
 
 ## Introduction
