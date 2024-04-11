@@ -14,8 +14,10 @@ function Login(){
 
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const login = async (data) => {
+        setLoading(true)
         console.log(data);
         setError("")
         try {
@@ -28,6 +30,7 @@ function Login(){
         } catch (error) {
             setError(error.message)
         }
+        setLoading(false)
     }
 
     const glogin = async () => {
@@ -112,7 +115,7 @@ function Login(){
                      <Button
                      type="submit"
                      className='w-full px-[40%]'
-                     >Sign in</Button>
+                     >{loading ? "Signing in..." : "Sign in"}</Button>
                 </div>
             </form>
         </div>

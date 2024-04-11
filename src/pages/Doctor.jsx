@@ -1,55 +1,81 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import docService from "../appwrite/authDoc";
+import conf from "../conf/conf";
 import { Button } from "../components";
 import { useSelector } from "react-redux";
 
 export default function ProfilePage() {
     const [post, setPost] = useState(null);
-    const [request, setRequest] = useState(null);
+    const [request, setRequest] = useState();
     const { slug } = useParams();
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
+    // console.log(userData);
     const isAuthor = post && userData ? post.user_id === userData.$id : false;
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                if (!slug || !userData) {
-                    return;
-                }
-    
-                const post = await docService.getPost(slug);
-                if (!post) {
-                    navigate("/");
-                    return;
-                }
-    
-                setPost(post);
-                console.log(post);
-    
-                const userRequest = post.requests.find(req => {
-                    const parsedReq = JSON.parse(req);
-                    return parsedReq.userid === userData.$id;
-                });
-    
-                if (userRequest) {
-                    setRequest(JSON.parse(userRequest));
-                    // console.log(request);
-                }
-            } catch (error) {
-                console.error("Error fetching post:", error);
-                navigate("/");
+
+    const fetchPost = async () => {
+        try {
+            if (!slug || !userData) {
+                return;
             }
-        };
+
+            const post = await docService.getPost(slug);
+            if (!post) {
+                navigate("/");
+                return;
+            }
+
+            setPost(post);
+            // console.log(post);
+            
+            const userRequest = post.requests.find(req => {
+                const parsedReq = JSON.parse(req);
+                return parsedReq.userid === userData.$id;
+            });
     
+            if (userRequest) {
+                setRequest(JSON.parse(userRequest));
+                // console.log(request);
+            }
+        } catch (error) {
+            console.error("Error fetching post:", error);
+            navigate("/");
+        }
+    };
+    
+    useEffect(() => {
         fetchPost();
-    }, [slug, navigate, userData]);
+    }, [slug, navigate, userData])
+    
 
     useEffect(() => {
-        console.log(request);
-    }, [request]);
+        
+        const unsubscribe = docService.client.subscribe(
+          `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteCollectionId2}.documents`, response => {
+            console.log(response);
+            if (response.events.includes(
+                "databases.*.collections.*.documents.*.update"
+              )) {
+                console.log('A REQUEST WAS CREATED')
+                setRequest(response.payload.requests
+                    .map((e)=> JSON.parse(e))
+                    .find((e)=> e.userid == userData.$id))
+                console.log(request);
+                
+            }
+        });
+
+
+        // console.log('unsubscribe:', unsubscribe)
+
+        return () => {
+            unsubscribe();
+        };
+    }, [userData]);
+    
 
     const deletePost = () => {
         docService.deletePost(post.$id)
@@ -91,10 +117,12 @@ export default function ProfilePage() {
             .then((status) => {
                 if (status) {
                     console.log("Request updated successfully");
-                    setRequest(newRequest);
+                    // setRequest(newRequest);
                 }
             })
             .catch(error => console.error("Error updating request:", error));
+        
+        // console.log(request);
     };
 
     return post ? (

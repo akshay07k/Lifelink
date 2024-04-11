@@ -1,8 +1,10 @@
 import React,{useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import docService from '../appwrite/authDoc'
+import conf from '../conf/conf'
 import NotfCard from "./NotfCard"
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { dark } from '@mui/material/styles/createPalette'
 
 function Notification() {
 
@@ -26,6 +28,35 @@ function Notification() {
         } 
 
     }, [slug, navigate]);
+
+    // function getRequests() {
+    //     if(!post) return;
+    //     const userRequest = post?.requests.map(request => JSON?.parse(request))
+    //     if(userRequest)
+    //         setRequests(JSON.parse(userRequest));
+    // }
+    useEffect(() => {
+
+        const unsubscribe = docService.client.subscribe(
+          `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteCollectionId2}.documents`, response => {
+            console.log(response);
+            if (response.events.includes(
+                "databases.*.collections.*.documents.*.update"
+              )) {
+                console.log('A REQUEST WAS CREATED')
+                setRequests(response.payload.requests.map((e)=>JSON.parse(e)))
+                
+            }
+        });
+
+
+        // console.log('unsubscribe:', unsubscribe)
+        // console.log(requests);
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     const acceptRequest = async (userid, roomid) => {
         const index = requests.findIndex((e) => e.userid == userid)
@@ -51,7 +82,7 @@ function Notification() {
     
 
 
-  return requests.length ? (
+  return requests?.length ? (
     <div>
         {requests.map((data) => (
             <div key={data.userid}>

@@ -13,7 +13,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 export default function Header() {
 
     const auth = useSelector((state) => state.auth)
-    console.log(auth);
+    // console.log(auth);
     
     const [notification, setNotification] = useState([])
     const slug = auth.userData?.labels[0]

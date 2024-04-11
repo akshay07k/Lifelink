@@ -3,6 +3,8 @@ import service from '../../appwrite/config';
 import conf from '../../conf/conf';
 import { useSelector } from 'react-redux';
 
+// This is for chat between user and doctor in future
+
 const Room = () => {
     const [messageBody, setMessageBody] = useState('');
     const [messages, setMessages] = useState([]);

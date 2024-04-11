@@ -82,7 +82,15 @@ export default function Home() {
                 <div className='h-[90%] w-[25%] flex-shrink-0' key={post.$id}>
                     <DocPost {...post} />
                 </div>
-            )) : (
+            )) : 
+            !auth.status ? (
+                <div 
+                    className='w-full h-full flex justify-center 
+                    items-center text-xl'
+                >
+                    login to view doctors
+                </div>
+            ) : (
                 <div 
                     className='w-full h-full flex justify-center 
                     items-center text-xl'

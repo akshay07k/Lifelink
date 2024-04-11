@@ -117,7 +117,7 @@ export class DocServices {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId2,
-                queries,
+                queries
 
             )
         } 
