@@ -11,12 +11,13 @@ export default function Home() {
     const auth = useSelector((state) => state.auth)
 
     const [posts, setPosts] = useState([])
+
     useEffect(() => {
-        if(auth){
+        if(auth && posts.length === 0){
             docService.getPosts([]).then((posts) => {
                 if (posts) {
                     setPosts(posts.documents)
-                    // console.log(posts);
+                    console.log(posts);
                 }
             })
         }
