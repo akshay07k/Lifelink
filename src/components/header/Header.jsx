@@ -83,9 +83,9 @@ export default function Header() {
                         <Link to={`/notifications/${slug}`}
                          className='mx-4 p-2 text-blue-400 
                          mr-2 '>
-                            {notification?.length ? <NotificationsActiveIcon /> : <NotificationsIcon /> }
+                            {slug ? notification?.length ? <NotificationsActiveIcon /> : <NotificationsIcon /> : "" }
                         </Link>
-                    <div className='flex items-center justify-end w-44 cursor-pointer px-3 border-l-2 border-slate-200' 
+                    <div className='flex items-center justify-end w-48 cursor-pointer px-3 border-l-2 border-slate-200' 
                     onClick={userClick}>
                             <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpc-IOXksvrRZO191r4scUWCErj6cQYqiBcg&usqp=CAU'} 
                             alt="" className='w-10 h-10 object-cover cursor-pointer rounded-[50%] mr-1.5'/>

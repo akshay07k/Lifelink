@@ -92,11 +92,12 @@ function Notification() {
         ))}
     </div>
   ) : (
-    <div className="flex justify-center items-center">
-        <div className="text-center">
-            <RefreshIcon />
-            <h2 className="mt-2">loading...</h2>
+    <div className="flex-col w-full my-2 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 text-blue-400  animate-spin
+        border-gray-300 border-t-blue-400 rounded-full">
+            
         </div>
+        <h1 className='text-xl'>loading...</h1>
     </div>
   )
 }

@@ -54,9 +54,11 @@ export default function Home() {
                 >
                     Book a meeting
                 </Link>
+                <Link to='/about/#soln'>
                 <p className='text-[#005ae2] text-xl m-[22px] underline'>
                     How it works
                 </p>
+                </Link>
             </div>
         </div>
         <div className='w-full h-full'>

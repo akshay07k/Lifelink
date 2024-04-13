@@ -160,7 +160,7 @@ export default function ProfilePage() {
                                 bgColor="bg-blue-500" 
                                 className="px-8 py-2 mx-2 opacity-90"
                             >
-                                Click to start 
+                                Click to Join 
                             </Button>
                             
                         ) :
@@ -185,8 +185,12 @@ export default function ProfilePage() {
             </div>
         </div>
     ) : (
-        <div className="w-full h-96 flex justify-center items-center text-xl">
-            Loading...
+        <div className="flex-col w-full my-2 flex items-center justify-center">
+          <div className="w-8 h-8 border-4 text-blue-400  animate-spin
+          border-gray-300 border-t-blue-400 rounded-full">
+              
+          </div>
+          <h1 className='text-xl'>loading...</h1>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { doctors } from '../../assets'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import {Link} from 'react-router-dom'
 
 
 export default function About() {
@@ -23,7 +24,7 @@ export default function About() {
             Our website will help people check and cure their diseases weather physical or mental.
             </p><br/>
             <h2 className='text-3xl border-b-2 border-cyan-700 w-[30%] pl-2'
-            >Your Solutions</h2>
+            id='soln'>Your Solutions</h2>
             <br />
             <ul className='list-disc border-double border-black w-[90%]'>
             <li className='p-2'>
@@ -71,11 +72,13 @@ export default function About() {
                  immediate and often life-saving medical assistance to individuals
                   facing urgent medical conditions or injuries.
                 </p>
+                <Link to={'/blood'}>
                 <button className='border-blue-700 border rounded-3xl m-4 px-8 py-2
                  text-blue-700 font-extrabold hover:bg-blue-500
                   hover:text-white hover:border-none' type="button">
                 <ArrowOutwardIcon />
                 </button>
+                </Link>
             </div>
             <div className='text-center h-[300px] w-[330px] hover:shadow-2xl
              rounded-xl border-[solid] border-2 border-gray-300 shadow-xl'>
@@ -101,11 +104,13 @@ export default function About() {
                 Online therapy, also known as teletherapy or telehealth, has emerged as a
                  convenient and effective alternative to traditional in-person therapy sessions.
                 </p>
+                <Link to={'/doctors'}>
                 <button className='border-blue-700 border rounded-3xl m-4 px-8 py-2
                  text-blue-700 font-extrabold hover:bg-blue-500
                  hover:text-white hover:border-none' type="button">
                 <ArrowOutwardIcon />
                 </button>
+                </Link>
             </div>
         </div>
     </div>
