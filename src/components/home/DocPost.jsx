@@ -6,12 +6,13 @@ export default function DocPost({
     $id, 
     name,
     title, 
-    doctorImage
+    doctorImage,
+    status
     }) {
         
   return (
     <div
-     className=''
+     className=""
     >
         <img 
          className='h-44 w-64 object-cover mt-5 mx-5 rounded-[10px]'

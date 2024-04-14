@@ -79,10 +79,11 @@ export default function Home() {
         <div 
             className='h-[400px] whitespace-nowrap flex items-end
              mx-[5%] my-5 overflow-x-auto overflow-y-hidden
-             scroll-smooth'
+             scroll-smooth justify-center'
         >
             {posts.length ? posts.map((post) => (
-                <div className='h-[90%] w-[25%] flex-shrink-0' key={post.$id}>
+                <div className={`h-[90%] w-[25%] flex-shrink-0
+                ${post.status == "inactive" ? "hidden" : ""}`}  key={post.$id}>
                     <DocPost {...post} />
                 </div>
             )) : 

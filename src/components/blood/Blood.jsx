@@ -40,7 +40,7 @@ function Blood() {
         <div className="w-1/2 h-full pt-16 px-8">
           <h2 className="text-4xl font-semibold mb-4">Need a Blood</h2>
           <p className="mb-4 text-lg">
-            If you or someone you know requires blood, don't hesitate to request it.
+            If you or someone you know requires blood,<br /> don't hesitate to request it.
           </p>
           <button className="bg-red-500 text-white text-lg px-5 py-2.5 rounded-full hover:bg-red-600 transition duration-300" onClick={toggleForm}>
             Request Blood

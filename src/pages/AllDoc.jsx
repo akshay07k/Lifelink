@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import docService from "../appwrite/authDoc"
 import { Link } from 'react-router-dom'
+import { Query } from 'appwrite';
 
 
 export default function AllPosts() {
@@ -70,7 +71,7 @@ export default function AllPosts() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
             {filteredPosts.map((post) => (
-              <div key={post.$id} className="border p-4 rounded-md">
+              <div key={post.$id} className={`border p-4 rounded-md ${post.status == "inactive" ? "hidden" : ""}`}>
                 <img src={docService.getFilePreview(post.doctorImage)}
                   alt={post.name} className="w-full h-52 object-cover rounded-md mb-2" />
                 <h2 className="text-lg font-semibold mb-2">Dr. {post.name}</h2>
