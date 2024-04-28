@@ -4,11 +4,11 @@ import App from './App.jsx'
 import './index.css'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Home, About, AllReq, ReqPage,
-  Blood, Contact, Login, Signup } from './components/index.js'
-import { AddDoc, AllDoc, EditDoc, Doctor,
-   Room, Notification, Video} from "./pages/index.js"
+import { Home, About, AllReq, ReqPage, Blood, Contact, Login, Signup } from './components/index.js'
+import { AddDoc, AllDoc, EditDoc, Doctor, Room, Notification, Video} from "./pages/index.js"
 
 const router = createBrowserRouter([
   {
@@ -85,5 +85,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
     <RouterProvider router={router}/>
     </Provider>
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      transition: Bounce
+    />
   </React.StrictMode>,
 )

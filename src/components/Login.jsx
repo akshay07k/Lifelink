@@ -5,7 +5,7 @@ import { login as authLogin } from '../store/authSlice'
 import { Button, Input } from '../components/index.js'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-
+import { toast } from 'react-toastify'
 
 function Login(){
 
@@ -26,8 +26,11 @@ function Login(){
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(authLogin({userData}))
                 navigate('/')
+                toast.success('Login successful');
+                
             }
         } catch (error) {
+            toast.error(error.message);
             setError(error.message)
         }
         setLoading(false)
@@ -40,8 +43,10 @@ function Login(){
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(authLogin({userData}))
                 navigate('/')
+                toast.success('Login successful');
             }
         } catch (error) {
+            toast.error(error.message);
             setError(error.message)
         }
     }
@@ -71,8 +76,8 @@ function Login(){
                     Sign Up
                 </Link>
             </p>
-            {error && <p className='text-red-600 text-center mt-8'>
-            {error}</p>}
+            {/* {error && <p className='text-red-600 text-center mt-8'>
+            {error}</p>} */}
 
 
 

@@ -4,6 +4,7 @@ import docService from "../appwrite/authDoc";
 import conf from "../conf/conf";
 import { Button } from "../components";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function ProfilePage() {
     const [post, setPost] = useState(null);
@@ -116,11 +117,15 @@ export default function ProfilePage() {
         docService.updateRequests(post.$id, updatedRequests)
             .then((status) => {
                 if (status) {
-                    console.log("Request updated successfully");
+                    toast.success('Request sent successfully')
+                    // console.log("Request updated successfully");
                     // setRequest(newRequest);
                 }
             })
-            .catch(error => console.error("Error updating request:", error));
+            .catch(error => {
+                console.error("Error updating request:", error);
+                toast.error('Try again later')
+            });
         
         // console.log(request);
     };

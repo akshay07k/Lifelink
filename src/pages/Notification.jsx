@@ -5,6 +5,7 @@ import conf from '../conf/conf'
 import NotfCard from "./NotfCard"
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { dark } from '@mui/material/styles/createPalette'
+import { toast } from 'react-toastify'
 
 function Notification() {
 
@@ -44,6 +45,7 @@ function Notification() {
                 "databases.*.collections.*.documents.*.update"
               )) {
                 console.log('A REQUEST WAS CREATED')
+                // toast.info('New request')
                 setRequests(response.payload.requests.map((e)=>JSON.parse(e)))
                 
             }
@@ -76,7 +78,7 @@ function Notification() {
         setRequests(updatedRequests);
 
         docService.updateRequests(post.$id, updatedRequests).then((status) => {
-            status && console.log("Deleted succesfully");
+            status && toast.error("Rejected succesfully");
         });
     }
     

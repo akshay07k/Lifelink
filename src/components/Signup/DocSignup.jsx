@@ -4,7 +4,7 @@ import { Button, Input, Select } from "../index";
 import docService from "../../appwrite/authDoc";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { toast } from "react-toastify";
 
 export default function DocSignup({ post }) {
     const { register, handleSubmit } = useForm({
@@ -39,6 +39,7 @@ export default function DocSignup({ post }) {
             if (dbPost) {
                 setLoading(false)
                 navigate(`/doctor/${dbPost.$id}`);
+                toast.success('Updated successfully')
             }
         } else {
             const file = data.image[0] ? await docService.uploadFile(data.image[0]) : null;

@@ -5,14 +5,17 @@ import { login } from '../../store/authSlice'
 import {Button, Input} from '../index'
 import { useDispatch } from 'react-redux'
 import {useForm} from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 function Signup() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {register, handleSubmit} = useForm()
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const create = async(data) => {
+        setLoading(true)
         setError("")
         try {
             const session = await authServices.createAccount(data);
@@ -20,10 +23,13 @@ function Signup() {
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(login({userData}))
                 navigate("/")
+                toast.success('Registration successful');
             }
         } catch (error) {
+            toast.error(error.message)
             setError(error.message)
         }
+        setLoading(false)
     }
 
     const glogin = async () => {
@@ -33,8 +39,10 @@ function Signup() {
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(authLogin({userData}))
                 navigate('/')
+                toast.success('Registration successful');
             }
         } catch (error) {
+            toast.error(error.message);
             setError(error.message)
         }
     }
@@ -62,8 +70,8 @@ function Signup() {
                     Sign In
                 </Link>
             </p>
-            {error && <p className='text-red-600 text-center mt-8'>
-            {error}</p>}
+            {/* {error && <p className='text-red-600 text-center mt-8'>
+            {error}</p>} */}
 
             <Button className='flex justify-center bg-white ml-8 mt-4 w-5/6 pr-24 gap-10'
              onClick={glogin}
@@ -108,7 +116,7 @@ function Signup() {
                     })}
                     />
                     <Button type='submit'
-                    className='w-full'>Create Account</Button>
+                    className='w-full'>{loading ? "Creating account..." : "Create Account"}</Button>
                 </div>
             </form>
         </div>
