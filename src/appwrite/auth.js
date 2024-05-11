@@ -43,8 +43,8 @@ export class AuthServices {
         try {
             return this.account.createOAuth2Session(
                 'google',
-                'http://localhost:5173',
-                'http://localhost:5173/login'
+                'https://lifelink-indol.vercel.app',
+                'https://lifelink-indol.vercel.app/login'
             )
         } 
         catch (error) {
