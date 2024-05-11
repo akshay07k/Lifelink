@@ -30,7 +30,7 @@ function Video() {
                 container: meetingContainerRef.current,
                 sharedLinks: [{
                     name: "Copy link",
-                    url: `http://localhost:5173/video/${roomid}`
+                    url: `https://lifelink-indol.vercel.app/video/${roomid}`
                 }],
                 scenario: {
                     mode: ZegoUIKitPrebuilt.OneONoneCall
