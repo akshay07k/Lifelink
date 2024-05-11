@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import docService from "../appwrite/authDoc"
 import { Link } from 'react-router-dom'
-import { Query } from 'appwrite';
 
 
 export default function AllPosts() {

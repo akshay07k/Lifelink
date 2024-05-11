@@ -86,11 +86,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/doctor/:slug',
-        element: (
-          <AuthLayout authentication>
-            <Doctor />
-          </AuthLayout>
-        )
+        element: <Doctor />
       },
       {
         path: "blood",
