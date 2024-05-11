@@ -22,7 +22,7 @@ function Signup() {
             if(session){
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(login({userData}))
-                navigate("/")
+                // navigate("/")
                 toast.success('Registration successful');
             }
         } catch (error) {
@@ -38,7 +38,7 @@ function Signup() {
             if(session){
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(authLogin({userData}))
-                navigate('/')
+                // navigate('/')
                 toast.success('Registration successful');
             }
         } catch (error) {
