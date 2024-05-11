@@ -15,7 +15,8 @@ import Signup from "./Signup/Signup.jsx"
 import DocSignup from "./Signup/DocSignup.jsx"
 import LogoutBtn from "./header/LogoutBtn.jsx"
 import Select from "./Select.jsx"
-
+import AuthLayout from "./AuthLayout.jsx"
+import Location from "./home/Location.jsx"
 
 export {
     Layout,
@@ -34,5 +35,7 @@ export {
     Signup,
     DocSignup,
     LogoutBtn,
-    Select
+    Select,
+    AuthLayout,
+    Location
 }

@@ -133,7 +133,7 @@ export default function ProfilePage() {
     return post ? (
         <div className="flex flex-col lg:flex-row items-center py-8 min-h-[410px]">
             <div className="lg:w-1/3 mb-4 lg:mb-0">
-                <h2 className="ml-20 text-lg font-medium font-sans">Profile Picture:</h2>
+                <h2 className="ml-24 text-lg font-medium font-sans">Profile Picture:</h2>
                 <img
                     src={docService.getFilePreview(post.doctorImage)}
                     alt={post.name}

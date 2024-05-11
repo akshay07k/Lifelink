@@ -48,7 +48,7 @@ export default function Home() {
                 fingertips.
             </p>
             <div className='p-2.5 flex'>
-                <Link to={!auth.status ? '/login' : '/doctors'}
+                <Link to='/doctors'
                  className='bg-[#0066ff] text-white 
                  text-lg p-3 my-2 rounded-md' 
                 >
@@ -124,7 +124,7 @@ export default function Home() {
              className='text-[65px] leading-none mt-4 mb-8'
             >Find the best hospitals <br/>
              near you in <br/> just one click</h1>
-            <Link to={!auth.status ? '/login' : '/'}
+            <Link to='/location'
              className='bg-blue-500 m-10 px-10 py-4
              text-2xl text-white rounded-xl'
             >

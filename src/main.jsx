@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Home, About, AllReq, ReqPage, Blood, Contact, Login, Signup } from './components/index.js'
+import { Home, About, AllReq, ReqPage, Blood, Contact, Login, Signup, AuthLayout, Location } from './components/index.js'
 import { AddDoc, AllDoc, EditDoc, Doctor, Room, Notification, Video} from "./pages/index.js"
 
 const router = createBrowserRouter([
@@ -29,36 +29,68 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />
+        element: (
+            <AuthLayout authentication={false}>
+                <Login />
+            </AuthLayout>
+        )
       },
       {
         path: '/signup',
-        element: <Signup />
+        element: (
+            <AuthLayout authentication={false}>
+                <Signup />
+            </AuthLayout>
+        )
       },
       {
         path: '/room',
-        element: <Room />
+        element: (
+          <AuthLayout authentication>
+            <Room />
+          </AuthLayout>
+        )
       },
 
       {
         path: '/video/:roomid',
-        element: <Video />
+        element: (
+          <AuthLayout authentication>
+            <Video />
+          </AuthLayout>
+        )
       },
       {
         path: "doctors",
-        element: <AllDoc />
+        element: (
+          <AuthLayout authentication>
+            <AllDoc />
+          </AuthLayout>
+        )
       },
       {
         path: '/doc-cr',
-        element: <AddDoc />
+        element: (
+          <AuthLayout authentication>
+            <AddDoc />
+          </AuthLayout>
+        )
       },
       {
         path: '/doc-ud/:slug',
-        element: <EditDoc />
+        element: (
+          <AuthLayout authentication>
+            <EditDoc />
+          </AuthLayout>
+        )
       },
       {
         path: '/doctor/:slug',
-        element: <Doctor />
+        element: (
+          <AuthLayout authentication>
+            <Doctor />
+          </AuthLayout>
+        )
       },
       {
         path: "blood",
@@ -75,6 +107,10 @@ const router = createBrowserRouter([
       {
         path: '/notifications/:slug',
         element: <Notification />
+      },
+      {
+        path: '/location',
+        element: <Location />
       },
     ]
   }

@@ -89,11 +89,13 @@ export default function About() {
                 Finding a hospital when you or a loved one requires medical attention is a
                  crucial task that demands careful consideration and swift action. 
                 </p>
+                <Link to={'/location'}>
                 <button className='border-blue-700 border rounded-3xl m-4 px-8 py-2
                  text-blue-700 font-extrabold hover:bg-blue-500
                  hover:text-white hover:border-none' type="button">
                 <ArrowOutwardIcon />
                 </button>
+                </Link>
             </div>
             <div className='text-center h-[300px] w-[330px] hover:shadow-2xl
              rounded-xl border-[solid] border-2 border-gray-300 shadow-xl'>
