@@ -47,7 +47,7 @@ export default function Header() {
 
 
   return (
-    <header className='sticky w-full z-30 top-0 bg-white grid'>
+    <header className='sticky w-full z-30 top-0 bg-white '>
         <nav className='h-[100px] shadow'>
         <div className="h-[65%] flex items-center justify-between px-5 py-0 border-b-[0.1px] border-b-[#8a9fc5] border-dotted">
                 <div className="h-full flex justify-center items-center ml-6">
