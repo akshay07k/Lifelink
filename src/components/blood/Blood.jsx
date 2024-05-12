@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
+import {blood} from "../../assets/index"
 
 function Blood() {
   const [showForm, setShowForm] = useState(false);
@@ -27,7 +28,7 @@ function Blood() {
   
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen grid">
       <header className="bg-red-500 text-white text-center py-8">
         <h1 className="text-4xl font-bold">Blood Donation</h1>
         <p>Save Lives, Donate Blood!</p>
@@ -56,9 +57,9 @@ function Blood() {
 
         <div className="w-1/2 pr-8">
           <img
-            src=""
+            src={blood}
             alt="Blood Donation"
-            className="w-1/2 h-96"
+            className="w-4/5 rounded-3xl object-contain"
           />
         </div>
       </section>
@@ -67,19 +68,19 @@ function Blood() {
         <h2 className="text-2xl font-semibold mb-4">Donation Process</h2>
         <ol className="list-decimal pl-6">
           <li className="mb-2">
-            <strong>Register:</strong> Visit a blood donation center and register as a donor.
+            <strong>Register:</strong> Register on lifelink for blood services.
           </li>
           <li className="mb-2">
-            <strong>Health Questionnaire:</strong> Complete a brief health questionnaire.
+            <strong>Donate:</strong> Click on Donate now and select the user which you want to donate .
           </li>
           <li className="mb-2">
-            <strong>Medical Examination:</strong> Undergo a quick medical examination.
+            <strong>Contact:</strong> Contact with the user for any query.
           </li>
           <li className="mb-2">
-            <strong>Donate Blood:</strong> The actual blood donation process (usually 10-15 minutes).
+            <strong>Donate Blood:</strong> Donate the blood to the user.
           </li>
           <li>
-            <strong>Rest and Refreshments:</strong> Relax and enjoy some refreshments afterward.
+            <strong>Request:</strong> You can also request blood and your your request will send to all lifelink users.
           </li>
         </ol>
       </section>
