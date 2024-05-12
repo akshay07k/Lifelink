@@ -25,7 +25,7 @@ function Login(){
             if(session){
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(authLogin({userData}))
-                // navigate('/')
+                navigate('/')
                 toast.success('Login successful');
                 
             }
@@ -42,7 +42,7 @@ function Login(){
             if(session){
                 const userData = await authServices.getCurrentUser()
                 if(userData) dispatch(authLogin({userData}))
-                // navigate('/')
+                navigate('/')
                 toast.success('Login successful');
             }
         } catch (error) {
