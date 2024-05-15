@@ -41,7 +41,14 @@ function App() {
       </div>
     </div>
   )
-   : <div className='text-4xl'>Loading...</div>;
+   : (
+    <div className="flex-col w-full my-2 mx-[90%] flex items-center justify-center">
+      <div className="w-8 h-8 border-4 text-blue-400  animate-spin
+      border-gray-300 border-t-blue-400 rounded-full">    
+      </div>
+      <h1 className='text-xl'>loading...</h1>
+    </div>
+);
 }
 
 export default App
