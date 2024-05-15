@@ -8,16 +8,11 @@ function Video() {
     const auth = useSelector((state) => state.auth.userData);
     const meetingContainerRef = useRef(null);
 
-    // useEffect(() => {
-    //     // Refresh the page when navigating to /video
-    //     window.location.reload();
-    // }, []);
-
     useEffect(() => {
         const loadMeeting = async () => {
             if (!auth) return;
-            const appId = 402575623;
-            const serverSecret = "4e386173f62538a36d9984b35e7da27f";
+            const appId = 318697823;
+            const serverSecret = "61f4daa84112155309db86fe14674bb0";
             const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
                 appId,
                 serverSecret,
