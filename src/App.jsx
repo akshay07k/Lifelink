@@ -1,21 +1,23 @@
-import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import authServices from './appwrite/auth'
-import './App.css'
-import { login, logout } from './store/authSlice'
-import { Header, Footer } from './components'
-import { Outlet } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import authServices from './appwrite/auth';
+import './App.css';
+import { login, logout } from './store/authSlice';
+import { Header, Footer } from './components';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 function App() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userData = await authServices.getCurrentUser();
         if (userData) {
-          dispatch(login({userData}));
+          dispatch(login({ userData }));
         } else {
           dispatch(logout());
         }
@@ -25,13 +27,19 @@ function App() {
         setLoading(false);
       }
     };
+
     fetchData();
-  }, []);
-  
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!loading) {
+      const currentPath = location.pathname;
+      navigate(currentPath);
+    }
+  }, [loading, location.pathname, navigate]);
 
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap 
-    content-between bg-transparent w-full scroll-smooth'>
+    <div className='min-h-screen flex flex-wrap content-between bg-transparent w-full scroll-smooth'>
       <div className='w-full block'>
         <Header />
         <main>
@@ -40,8 +48,12 @@ function App() {
         <Footer />
       </div>
     </div>
-  )
-   : <div className='text-4xl'>Loading...</div>;
+  ) : (
+    <div className="flex-col w-full my-2 mx-[90%] flex items-center justify-center">
+      <div className="w-8 h-8 border-4 text-blue-400 animate-spin border-gray-300 border-t-blue-400 rounded-full"></div>
+      <h1 className='text-xl'>loading...</h1>
+    </div>
+  );
 }
 
-export default App
+export default App;
