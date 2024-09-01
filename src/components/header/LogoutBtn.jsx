@@ -23,7 +23,7 @@ function LogoutBtn({handleClick, userdata, isopen}) {
         })
     }
   return (
-    <div id='userAcc' className={`relative float-right mr-2 w-44 ${isopen ? "top-0 h-24 bg-slate-50 z-10" : "-top-36"}
+    <div id='userAcc' className={`relative float-right mr-2 w-44 ${isopen ? "top-0 bg-slate-50 z-10" : "-top-36"}
      cursor-pointer rounded-lg ease-in duration-500`}>
         {userdata?.labels[0] && (
             <Link to={`/doctor/${userdata?.labels[0]}`}>
