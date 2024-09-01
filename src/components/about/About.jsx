@@ -7,14 +7,14 @@ import {Link} from 'react-router-dom'
 export default function About() {
   return (
     <>
-    <div className='flex bg-[aliceblue] w-full mt-10'>
-        <div className='w-1/2 mr-5 my-2 py-4'>
+    <div className='flex flex-wrap bg-[aliceblue] w-full mt-10'>
+        <div className='flex justify-center items-center'>
             <img 
-             className='w-[610px] h-[500px] my-2 mx-10 object-cover rounded-xl'
+             className=' w-96 h-96 sm:w-[610px] sn:h-[500px] my-2 mx-10 object-cover rounded-xl'
             src={doctors} alt="image of doctors" />
         </div>
-        <div className='w-1/2 m-5 pr-8'>
-            <h1 className='w-1/3 text-[40px] font-medium after:content-[""]
+        <div className='w-full xl:w-1/2 px-6 sm:px-40 lg:px-20'>
+            <h1 className='lg:w-1/3 text-[40px] font-medium after:content-[""]
              after:block after:w-6/12 after:border-b-[5px]
              after:border-b-[#9f1823] after:border-solid'
             >About Us</h1><br/>
@@ -23,7 +23,7 @@ export default function About() {
             We will help people book appointments with doctors when they need and blood supply in emergency situations. 
             Our website will help people check and cure their diseases weather physical or mental.
             </p><br/>
-            <h2 className='text-3xl border-b-2 border-cyan-700 w-[30%] pl-2'
+            <h2 className='text-3xl border-b-2 border-cyan-700 lg:w-[30%] pl-2'
             id='soln'>Your Solutions</h2>
             <br />
             <ul className='list-disc border-double border-black w-[90%]'>
@@ -60,7 +60,7 @@ export default function About() {
             >What We Do</h1>
         </div>
         <div 
-         className='w-[90%] h-[400px] flex items-center justify-evenly mx-[5%] mt-0'
+         className='w-[90%] flex items-center justify-evenly flex-wrap mx-[5%] gap-8 mt-10'
         >
             <div className='text-center h-[300px] w-[330px] hover:shadow-2xl
              rounded-xl border-[solid] border-2 border-gray-300 shadow-xl'>

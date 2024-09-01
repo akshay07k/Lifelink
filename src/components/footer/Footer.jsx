@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#112b3d] border-y">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-                <div className="md:flex md:justify-around cursor-pointer">
+                <div className="md:flex md:justify-around cursor-pointer mx-10 sm:mx-0">
                     <div className="mb-6 md:mb-0">
                         <Link to="/" className="flex items-center ">
                             <h1
@@ -21,11 +21,18 @@ export default function Footer() {
                                 className='text-[#0B8457]'>link.</span>
                             </h1>
                         </Link>
+                        <Link to="/doc-cr">
+                        <h1 className='font-sans bg-gradient-to-r 
+                        from-cyan-100 to-cyan-700 text-transparent 
+                        bg-clip-text uppercase border-cyan-900 border-b-2 rounded-xl px-2 py-1 w-2/3 sm:w-full mt-2'  >
+                            Apply for Doctor
+                        </h1>
+                        </Link>
                     </div>
                     
-                    <div>
+                    <div className='mb-4'>
                         <h2 className='text-3xl text-white mb-3 pl-4
-                         border-gray-600 border-b-2 rounded-xl'>About</h2>
+                         border-gray-600 border-b-2 rounded-xl w-1/2 sm:w-full'>About</h2>
                         <ul className='text-medium text-pretty text-gray-300'>
                             <li>Health Queries</li>
                             <li>Online Doctor App</li>
@@ -34,9 +41,9 @@ export default function Footer() {
                             <li>Privacy Policy</li>
                         </ul>
                     </div>
-                    <div>
+                    <div className='mb-4'>
                         <h2 className='text-3xl text-white mb-3 pl-4
-                         border-gray-600 border-b-2 rounded-xl'>Services</h2>
+                         border-gray-600 border-b-2 rounded-xl w-1/2 sm:w-full'>Services</h2>
                         <ul className='text-medium text-pretty text-gray-300'>
                             <li>Online Doctor Consultation</li>
                             <li>Health Program</li>
@@ -47,7 +54,7 @@ export default function Footer() {
                     </div>
                     <div>
                         <h2 className='text-3xl text-white mb-3 px-6
-                         border-gray-600 border-b-2 rounded-xl'>Social</h2>
+                         border-gray-600 border-b-2 rounded-xl w-1/2 sm:w-full'>Social</h2>
                         <ul className='text-medium text-pretty text-gray-300'>
                             <li>Facebook</li>
                             <li>LinkedIn</li>

@@ -50,25 +50,27 @@ export default function Header() {
     <header className='sticky w-full z-30 top-0 bg-white grid'>
         <nav className='h-[100px] shadow'>
         <div className="h-[65%] flex items-center justify-between px-5 py-0 border-b-[0.1px] border-b-[#8a9fc5] border-dotted">
-                <div className="h-full flex justify-center items-center ml-6">
+                <div className="h-full flex justify-center items-center sm:ml-6 lg:w-72">
                     <h1 className="text-4xl  w-full 
                 max-w-[160px] bg-gradient-to-r from-blue-700 to-green-700 text-transparent bg-clip-text ">
                         Lifelink.
                     </h1>
                 </div>
-                <div className=" w-[400px] h-[42px] flex items-center bg-[aliceblue] rounded-full">
+
+                {/* Search */}
+                {/* <div className=" w-[400px] h-[42px] flex items-center bg-[aliceblue] rounded-full">
                     <SearchIcon className='ml-5 mr-2'/>
                     <input
                         className="border-b-[#a1a1a1] border-b border-solid w-4/5 h-4/5 p-3.5 rounded-[50px]  border-[none] outline-none"
                         type="text"
                         placeholder="Search here..."
                     />
-                    {/*  */}
-                </div>
+                    
+                </div> */}
                 
                 {!auth.status ? (
-                    <div className='w-60'>
-                        <Link to="/login" className="no-underline text-xl mx-8">
+                    <div className='sm:w-72'>
+                        <Link to="/login" className="no-underline text-xl mx-8 hidden sm:inline-block ">
                             Log in
                         </Link>
                         <Link
@@ -79,17 +81,17 @@ export default function Header() {
                         </Link>
                     </div>
                 ) : (
-                    <div className='flex items-center w-60'>
+                    <div className='flex items-center justify-center w-44 sm:w-72'>
                         <Link to={`/notifications/${slug}`}
                          className='mx-4 p-2 text-blue-400 
                          mr-2 '>
                             {slug ? notification?.length ? <NotificationsActiveIcon /> : <NotificationsIcon /> : "" }
                         </Link>
-                    <div className='flex items-center justify-end w-48 cursor-pointer px-3 border-l-2 border-slate-200' 
+                    <div className='flex items-center justify-end sm:w-48 cursor-pointer sm:px-3 border-l-2 border-slate-200' 
                     onClick={userClick}>
                             <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpc-IOXksvrRZO191r4scUWCErj6cQYqiBcg&usqp=CAU'} 
                             alt="" className='w-10 h-10 object-cover cursor-pointer rounded-[50%] mr-1.5'/>
-                            <p>Hi {auth.userData?.name}</p>
+                            <p>Hi <span className='uppercase'>{auth.userData?.name}</span></p>
                             {!down ? <ExpandMoreIcon className='p-[2px]'/> : <ExpandLessIcon className='p-[2px]'/>}
                     </div>
                     </div>
@@ -99,14 +101,14 @@ export default function Header() {
 
                     <LogoutBtn handleClick={userClick} userdata={auth.userData}/>
 
-            <div className="h-[35%] absolute bottom-1 left-1/3" >
-                <ul className="w-[30%] flex justify-around">
+            <div className="h-[35%] absolute bottom-1 left-[17%] sm:left-1/3" >
+                <ul className="w-[30%] flex justify-around ">
                     <li className="text-xl text-[#333] no-underline transition-[0.5s] inline-block list-none mx-[15px] my-2.5 hover:text-[#0B8457]">
                         <NavLink to="/" className={({ isActive }) => `${isActive ? "text-green-800" : ""}`}>
                             Home
                         </NavLink>
                     </li>
-                    <li className="text-xl text-[#333] no-underline transition-[0.5s] inline-block list-none mx-[15px] my-2.5 hover:text-[#0B8457]">
+                    <li className="text-xl text-[#333] no-underline transition-[0.5s] hidden sm:inline-block list-none mx-[15px] my-2.5 hover:text-[#0B8457]">
                         <NavLink to="/about" className={({ isActive }) => `${isActive ? "text-green-700" : ""}`}>
                             About
                         </NavLink>
@@ -121,7 +123,7 @@ export default function Header() {
                             Blood
                         </NavLink>
                     </li>
-                    <li className="text-xl text-[#333] no-underline transition-[0.5s] inline-block list-none mx-[15px] my-2.5 hover:text-[#0B8457]">
+                    <li className="text-xl text-[#333] no-underline transition-[0.5s] hidden sm:inline-block list-none mx-[15px] my-2.5 hover:text-[#0B8457]">
                         <NavLink to="/contact" className={({ isActive }) => `${isActive ? "text-green-700" : ""}`}>
                             Contact
                         </NavLink>

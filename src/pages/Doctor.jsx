@@ -131,13 +131,13 @@ export default function ProfilePage() {
     };
 
     return post ? (
-        <div className="flex flex-col lg:flex-row items-center py-8 min-h-[410px]">
-            <div className="lg:w-1/3 mb-4 lg:mb-0">
-                <h2 className="ml-24 text-lg font-medium font-sans">Profile Picture:</h2>
+        <div className="flex flex-col md:flex-row items-center py-8 min-h-[410px] px-4 lg:px-0">
+            <div className="w-full md:w-1/2 lg:w-1/3 mb-4 lg:mb-0  lg:pl-24">
+                <h2 className=" text-lg font-medium font-sans">Profile Picture:</h2>
                 <img
                     src={docService.getFilePreview(post.doctorImage)}
                     alt={post.name}
-                    className="rounded-xl w-72 h-52 object-cover ml-24 mb-4"
+                    className="rounded-xl w-72 h-52 object-cover  mb-4"
                 />
                 {isAuthor && (
                     <div className="mt-2 ml-28 gap-3 flex justify-center lg:justify-start">

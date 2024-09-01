@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {doctorsImage, map} from "../../assets/index.js"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LockIcon from '@mui/icons-material/Lock';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import docService from '../../appwrite/authDoc.js';
@@ -26,16 +27,17 @@ export default function Home() {
 
   return (
     <>
+    
     <div 
-     className='flex bg-[aliceblue] mx-[30px] my-[50px] w-[98%]'
+     className='flex bg-[aliceblue] w-full m-0 sm:mx-[30px] my-[50px] sm:w-[95%] lg:w-[98%]'
     >
-        <div className='h-full w-full mx-[50px] my-[30px]'>
+        <div className='h-full w-full ml-6 sm:ml-[50px] lg:mr-[50px] sm:my-[30px]'>
             <h2
              className='bg-[rgb(206,232,255)] text-[rgb(66,19,255)] 
              w-[310px] text-lg font-[lighter] mt-2.5 px-2.5 py-[5px]'
             >WE TAKE CARE OF YOUR HEALTH</h2>
             <h1 
-             className='text-[80px] font-extralight 
+             className='text-5xl lg:text-[80px] font-extralight 
              leading-[100%] pt-[30px] pb-0 px-0'
              >
                 Consult your doctor <br /> from home
@@ -61,14 +63,14 @@ export default function Home() {
                 </Link>
             </div>
         </div>
-        <div className='w-full h-full'>
+        <div className='w-full h-full hidden lg:block ml-0'>
             <img
-             className='h-[470px] w-[500px] object-cover m-[30px] rounded-[20px]'
+             className='h-[470px] w-80 lg:w-[400px] xl:w-[500px] object-cover m-[30px] rounded-[20px]'
              src={doctorsImage} alt="Doctor image" />
         </div>
     </div>
     
-    <div className='w-full mx-0 my-[50px]'>
+    <div className='w-full px-4 mx-0 my-[50px]'>
         <div className='w-full flex justify-center'>
             <h1 
              className='text-[40px] font-medium after:content-[""]
@@ -77,23 +79,27 @@ export default function Home() {
             >Meet Our Specialist Doctors</h1>
         </div>
         <div 
-            className='h-[400px] whitespace-nowrap flex items-end
-             mx-[5%] my-5 overflow-x-auto overflow-y-hidden
-             scroll-smooth justify-center'
+            className='h-[400px] w-auto whitespace-nowrap flex items-end
+             mx-[2%] sm:mx-[5%] my-5 overflow-x-auto overflow-y-hidden
+             scroll-smooth'
         >
             {posts.length ? posts.map((post) => (
-                <div className={`h-[90%] w-[25%] flex-shrink-0
+                <div className={`h-96 w-72 mx-2 rounded-md border flex-shrink-0
                 ${post.status == "inactive" ? "hidden" : ""}`}  key={post.$id}>
                     <DocPost {...post} />
                 </div>
             )) : 
             !auth.status ? (
-                <div 
-                    className='w-full h-full flex justify-center 
-                    items-center text-xl'
-                >
-                    login to view doctors
+                <div className='w-full h-full flex justify-center items-center flex-col p-4 bg-gray-50 border border-black/5 rounded-xl'>
+                    <div className='backdrop-blur-lg bg-white/30 p-4 rounded-xl shadow-lg my-2'>
+                    <LockIcon className='text-9xl' fontSize='large'/>
+                    </div>
+                    <div className='backdrop-blur-lg bg-white/30 p-8 rounded-xl shadow-lg font-sans'>
+                    Login / Signup to view Doctors
+                    </div>
                 </div>
+
+
             ) : (
                 <div 
                     className='w-full h-full flex justify-center 
@@ -108,31 +114,31 @@ export default function Home() {
     </div>
 
     <div 
-     className='w-full h-[650px] p-8 pt-0 flex'
+     className='w-full sm:h-[650px] p-8 pt-0 flex '
     >
         
-        <div className='w-full h-[600px] absolute left-0 z-[-2] p-4'>
+        <div className='w-full  sm:h-[600px] absolute left-0 z-[-2] p-4'>
             <img
             className='h-[550px] w-full brightness-105
              object-cover rounded-xl opacity-25'
             src={map} alt="" />
         </div>
-        <div className='h-full w-full py-16 px-6  backdrop-blur-[1px]
+        <div className='h-full w-full py-16 px-3 sm:px-6  backdrop-blur-[1px]
         flex items-center justify-between'>
-            <div className='w-1/2 h-full p-3 pt-8'>
+            <div className='w-full sm:w-1/2 h-full p-3 pt-8'>
             <h1
-             className='text-[65px] leading-none mt-4 mb-8'
+             className='text-3xl sm:text-[65px] leading-none mt-4 mb-8 font-light'
             >Find the best hospitals <br/>
              near you in <br/> just one click</h1>
             <Link to='/location'
-             className='bg-blue-500 m-10 px-10 py-4
+             className='bg-blue-500 my-5 sm:m-10 px-5 sm:px-10 py-2 sm:py-4
              text-2xl text-white rounded-xl'
             >
                 Find<LocationOnIcon/>
             </Link>
             </div>
                     
-            <div className='w-1/2 h-[470px]'>
+            <div className='w-1/2 h-[470px] hidden sm:block'>
             <img
                 className='h-full w-[700px] brightness-105
                 object-cover rounded-xl mr-8'

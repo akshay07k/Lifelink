@@ -15,7 +15,7 @@ export default function DocPost({
      className=""
     >
         <img 
-         className='h-44 w-64 object-cover mt-5 mx-5 rounded-[10px]'
+         className='h-44 w-56 sm:w-64 object-cover mt-5 mx-5 rounded-[10px]'
         src={docService.getFilePreview(doctorImage)} alt={name} />
         <h2
          className='font-thin mx-[30px] mt-4'

@@ -37,13 +37,13 @@ function Blood() {
         </Link>
       </header>
 
-      <section id="process1" className="bg-white p-8 flex h-80">
-        <div className="w-1/2 h-full pt-16 px-8">
-          <h2 className="text-4xl font-semibold mb-4">Need a Blood</h2>
-          <p className="mb-4 text-lg">
+      <section id="process1" className="bg-white p-8 flex xl:h-80 flex-wrap">
+        <div className="w-full sm:w-1/2 h-full sm:pt-16 px-8">
+          <h2 className="text-3xl sm:text-4xl font-semibold mb-4">Need a Blood</h2>
+          <p className="mb-4 text-sm sm:text-lg">
             If you or someone you know requires blood,<br /> don't hesitate to request it.
           </p>
-          <button className="bg-red-500 text-white text-lg px-5 py-2.5 rounded-full hover:bg-red-600 transition duration-300" onClick={toggleForm}>
+          <button className="bg-red-500 text-white text-lg px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full hover:bg-red-600 transition duration-300" onClick={toggleForm}>
             Request Blood
           </button>
 
@@ -55,7 +55,7 @@ function Blood() {
           )}
         </div>
 
-        <div className="w-1/2 pr-8">
+        <div className="w-1/2 pr-8 hidden sm:block">
         <img
             src={blood}
             alt="Blood Donation"

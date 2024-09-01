@@ -46,7 +46,7 @@ function AllReq() {
                         type="text"
                         value={bloodGroupFilter}
                         onChange={(e) => setBloodGroupFilter(e.target.value)}
-                        placeholder="Search by Blood Group"
+                        placeholder="Blood Group"
                         className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                     />
                 </div>
@@ -55,7 +55,7 @@ function AllReq() {
                         type="text"
                         value={locationFilter}
                         onChange={(e) => setLocationFilter(e.target.value)}
-                        placeholder="Search by Location"
+                        placeholder="Location"
                         className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                     />
                 </div>
@@ -67,7 +67,7 @@ function AllReq() {
 
             </div>
             <div className="flex-1 p-4 overflow-y-auto max-h-[800px]">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {(bloodGroupFilter || locationFilter) && !filteredPosts.length ? (
                         <div className='w-full h-96 flex justify-center text-xl mx-[90%]'>
                             No Such Requests Available
