@@ -11,8 +11,8 @@ const NotfCard = ({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex 
-     mx-36 my-8 justify-between">
+    <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex flex-wrap
+     sm:mx-36 my-8 justify-between ">
       <div>
       <p className="text-lg font-semibold mb-2">Consultation Request</p>
       <p className="mb-4">Mr/Ms {name} is requesting for consultation.</p>

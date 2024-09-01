@@ -8,7 +8,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 
-function LogoutBtn({handleClick, userdata}) {
+function LogoutBtn({handleClick, userdata, isopen}) {
 
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
@@ -23,8 +23,8 @@ function LogoutBtn({handleClick, userdata}) {
         })
     }
   return (
-    <div id='userAcc' className='z-50 float-right bg-gray-50 mr-2 w-44
-     cursor-pointer rounded-lg hidden'>
+    <div id='userAcc' className={`relative float-right mr-2 w-44 ${isopen ? "top-0 h-24 bg-slate-50 z-10" : "-top-36"}
+     cursor-pointer rounded-lg ease-in duration-500`}>
         {userdata?.labels[0] && (
             <Link to={`/doctor/${userdata?.labels[0]}`}>
                 <button className='h-10 w-full flex items-center justify-between

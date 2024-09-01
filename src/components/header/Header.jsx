@@ -40,8 +40,8 @@ export default function Header() {
     const [down, setDown] = useState(false)
 
     function userClick() {
-        let butn = document.querySelector('#userAcc');
-        !down ? butn.classList.remove("hidden") : butn.classList.add("hidden")
+        // let butn = document.querySelector('#userAcc');
+        // butn.classList.toggle("hidden")
         setDown(!down)
     }
 
@@ -90,7 +90,7 @@ export default function Header() {
                     <div className='flex items-center justify-end sm:w-48 cursor-pointer sm:px-3 border-l-2 border-slate-200' 
                     onClick={userClick}>
                             <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpc-IOXksvrRZO191r4scUWCErj6cQYqiBcg&usqp=CAU'} 
-                            alt="" className='w-10 h-10 object-cover cursor-pointer rounded-[50%] mr-1.5'/>
+                            alt="" className='w-10 h-10 object-cover cursor-pointer rounded-[50%] mr-1.5 hidden sm:block'/>
                             <p>Hi <span className='uppercase'>{auth.userData?.name}</span></p>
                             {!down ? <ExpandMoreIcon className='p-[2px]'/> : <ExpandLessIcon className='p-[2px]'/>}
                     </div>
@@ -99,7 +99,7 @@ export default function Header() {
 
             </div>
 
-                    <LogoutBtn handleClick={userClick} userdata={auth.userData}/>
+                <LogoutBtn handleClick={userClick} userdata={auth.userData} isopen={down}/>
 
             <div className="h-[35%] absolute bottom-1 left-[17%] sm:left-1/3" >
                 <ul className="w-[30%] flex justify-around ">

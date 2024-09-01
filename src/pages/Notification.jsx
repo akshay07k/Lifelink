@@ -22,7 +22,7 @@ function Notification() {
                     .map(request => JSON.parse(request))
                     setRequests(data)
                     setPost(post)
-                    console.log(data);
+                    // console.log(data);
                 }
                 else navigate("/");
             });
@@ -40,7 +40,7 @@ function Notification() {
 
         const unsubscribe = docService.client.subscribe(
           `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteCollectionId2}.documents`, response => {
-            console.log(response);
+            // console.log(response);
             if (response.events.includes(
                 "databases.*.collections.*.documents.*.update"
               )) {
@@ -64,7 +64,7 @@ function Notification() {
         const index = requests.findIndex((e) => e.userid == userid)
         requests[index].callId = `/video/${roomid}`;
         requests[index].confirm = true;
-        console.log(requests);
+        // console.log(requests);
 
         await docService.updateRequests(post.$id, requests).then((status) => {
             status && console.log("Accepted succesfully");

@@ -61,7 +61,7 @@ export default function DocSignup({ post }) {
     return (
         <div className="w-full">
             <div
-            className="flex items-center justify-center my-8 mx-16 
+            className="flex items-center justify-center my-8 sm:px-16 
             text-4xl pb-4 w-full max-w-[800px] bg-gradient-to-r 
             from-blue-700 to-green-700 text-transparent 
             bg-clip-text border-b"
